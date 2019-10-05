@@ -8,16 +8,37 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Area2D",
+"class": "Interactable",
+"language": "GDScript",
+"path": "res://Items/Interactable.gd"
+}, {
+"base": "Node2D",
+"class": "Stage",
+"language": "GDScript",
+"path": "res://Stages/Stage.gd"
+}, {
+"base": "Node2D",
+"class": "StageManager",
+"language": "GDScript",
+"path": "res://Stages/StageManager.gd"
+} ]
 _global_script_class_icons={
-
+"Interactable": "",
+"Stage": "",
+"StageManager": ""
 }
 
 [application]
 
-config/name="NothingGotTilted"
-run/main_scene="res://Game.tscn"
+config/name="NothingGlitters"
+run/main_scene="res://Game/Main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Game="*res://Game/Game.gd"
 
 [display]
 
@@ -71,3 +92,10 @@ cancel={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Items"
+2d_physics/layer_3="Environment"
+2d_physics/layer_4="Bounds"

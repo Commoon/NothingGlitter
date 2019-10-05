@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Stages/StageManager.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Square.png" type="Texture" id=2]
+[ext_resource path="res://Assets/CanvasItemMaterial.tres" type="Material" id=3]
+[ext_resource path="res://Assets/StageName.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Items/Goal.tscn" type="PackedScene" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 640, 10 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 480 )
+
+[node name="StageManager" type="Node2D"]
+pause_mode = 1
+script = ExtResource( 1 )
+starting_pause = 1.0
+
+[node name="Background" type="Sprite" parent="."]
+modulate = Color( 0.0392157, 0.0392157, 0.0392157, 1 )
+scale = Vector2( 20, 15 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="TitleText" type="RichTextLabel" parent="."]
+modulate = Color( 0.784314, 0.784314, 0.784314, 1 )
+material = ExtResource( 3 )
+anchor_right = 1.0
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 1240.0
+margin_bottom = 100.0
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0.0588235, 0.0588235, 0.0588235, 1 )
+bbcode_enabled = true
+bbcode_text = "Stage 0: Nothing"
+visible_characters = 0
+text = "Stage 0: Nothing"
+scroll_active = false
+
+[node name="Player" parent="." instance=ExtResource( 5 )]
+visible = false
+position = Vector2( 400, 70 )
+collision_mask = 10
+SPEED = 400.0
+
+[node name="Goal" parent="." instance=ExtResource( 6 )]
+visible = false
+position = Vector2( 1040, 720 )
+collision_layer = 2
+
+[node name="Bounds" type="StaticBody2D" parent="."]
+
+[node name="Top" type="CollisionShape2D" parent="Bounds"]
+position = Vector2( 640, -10 )
+shape = SubResource( 1 )
+
+[node name="Bottom" type="CollisionShape2D" parent="Bounds"]
+position = Vector2( 640, 970 )
+shape = SubResource( 1 )
+
+[node name="Left" type="CollisionShape2D" parent="Bounds"]
+position = Vector2( -10, 480 )
+shape = SubResource( 2 )
+
+[node name="Right" type="CollisionShape2D" parent="Bounds"]
+position = Vector2( 1290, 480 )
+shape = SubResource( 2 )
+

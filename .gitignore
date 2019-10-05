@@ -4,3 +4,5 @@ dist/
 /.import
 
 *.swp
+
+export_presets.cfg
