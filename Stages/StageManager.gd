@@ -1,7 +1,7 @@
-tool
 extends Node2D
 
 signal typing_end
+signal started
 
 class_name StageManager
 
@@ -10,7 +10,6 @@ export var starting_pause = 0.5
 export var goal_position = Vector2(1040, 720) setget set_goal_position
 
 onready var title_text = $TitleText
-onready var player = $Player
 onready var goal = $Goal
 var started = false
 var showing_player = -1
@@ -21,8 +20,8 @@ onready var stage = get_parent()
 
 func _ready():
     title_text.visible_characters = 0
-    player.hide()
     goal.hide()
+    set_goal_position(goal_position)
     title_text.bbcode_text = "Stage %d: Nothing" % stage.STAGE_NUMBER
     typing = 0
     showing_player = 0
@@ -42,9 +41,9 @@ func _process(delta):
         if showing_player >= 2 * starting_pause:
             goal.show()
             started = true
-            stage.call_deferred("after_start")
+            emit_signal("started")
         elif showing_player >= starting_pause:
-            player.show()
+            Game.player.show()
 
 
 func set_goal_position(value):

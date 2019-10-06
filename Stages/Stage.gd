@@ -19,10 +19,6 @@ func _enter_tree():
     Game.current_stage = self
 
 
-func after_start():
-    pass
-
-
 func add_word(word):
     var title_text = stage_manager.title_text as RichTextLabel
     if title_text.text[-1] != word[0]:

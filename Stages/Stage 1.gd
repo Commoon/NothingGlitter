@@ -2,28 +2,29 @@ extends Stage
 
 
 onready var words = $Words
+onready var glitters_background = $GlittersBackground
+onready var glitters = $Glitters
 
 
 func _ready():
-    stage_manager.goal_position = Vector2(rand_range(100, 1180), rand_range(620, 900))
-    
-
-func _enter_tree():
-    Game.current_stage = self
-
-
-func after_start():
-    words.display()
+    var box = (glitters.process_material as ParticlesMaterial).emission_box_extents
+    var x = (randf() * 2 - 1) * box.x * 0.9
+    var y = (randf() * 2 - 1) * box.y * 0.9
+    stage_manager.goal_position = Vector2(x, y) + glitters.position
 
 
 func update_glitters(text):
-    if text.find("Nothing glitter") >= 0:
-        $GlittersBackground.hide()
-        $Glitters.emitting = false
+    if Utils.check_phrase("Nothing glitter", text):
+        glitters_background.hide()
+        glitters.emitting = false
     elif not $GlittersBackground.visible:
-        $GlittersBackground.show()
-        $Glitters.emitting = true
+        glitters_background.show()
+        glitters.emitting = true
 
 
 func _on_StageManager_typing_end(text):
     update_glitters(text)
+
+
+func _on_StageManager_started():
+    words.display()

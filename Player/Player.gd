@@ -6,6 +6,14 @@ var velocity = Vector2.ZERO
 var to_interact: Node2D = null
 
 
+func _ready():
+    hide()
+
+
+func _enter_tree():
+    Game.player = self
+
+
 func _physics_process(delta):
     if not Game.current_stage.stage_manager.started:
         return

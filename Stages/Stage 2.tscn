@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Stages/Stage 2.gd" type="Script" id=1]
+[ext_resource path="res://Stages/StageManager.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Items/Words.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Square.png" type="Texture" id=4]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=5]
+
+[sub_resource type="SegmentShape2D" id=1]
+a = Vector2( 0, -256 )
+b = Vector2( 0, 256 )
+
+[node name="Stage 2" type="Node2D"]
+position = Vector2( 0, -2.45557 )
+script = ExtResource( 1 )
+STAGE_NUMBER = 2
+
+[node name="StageManager" parent="." instance=ExtResource( 2 )]
+goal_position = Vector2( 1180, 860 )
+
+[node name="Words" parent="." instance=ExtResource( 3 )]
+position = Vector2( 146.101, 303.251 )
+TEXT = "A tilted stick blocks the way.
+What you've got to do is..."
+
+[node name="Stick" type="KinematicBody2D" parent="."]
+modulate = Color( 0, 0.964706, 1, 1 )
+position = Vector2( 1006.75, 714.544 )
+collision_layer = 2
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stick"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Stick"]
+scale = Vector2( 0.25, 8 )
+texture = ExtResource( 4 )
+
+[node name="Player" parent="." instance=ExtResource( 5 )]
+position = Vector2( 440, 70 )
+
+[connection signal="started" from="StageManager" to="." method="_on_StageManager_started"]
+[connection signal="typing_end" from="StageManager" to="." method="_on_StageManager_typing_end"]

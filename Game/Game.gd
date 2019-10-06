@@ -4,6 +4,7 @@ const MAX_STAGE = 2
 
 var current_stage: Stage = null
 var main_scene: Node = null
+var player = null
 
 var paused = false
 
@@ -24,7 +25,7 @@ func next_stage():
     var number = current_stage.STAGE_NUMBER
     var world_environment = main_scene.get_node("WorldEnvironment")
     number = (number + 1) % (MAX_STAGE + 1)
-    var stage_scene = load("res://Stages/Stage %d.tscn" % number) if number < MAX_STAGE else \
+    var stage_scene = load("res://Stages/Stage %d.tscn" % number) if number <= MAX_STAGE else \
         load("res://Game/Ending.tscn")
     current_stage.queue_free()
     var new_stage = stage_scene.instance()

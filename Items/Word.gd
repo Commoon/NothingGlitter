@@ -59,27 +59,13 @@ func set_text(value):
         text.hide()
         text.show()
         wait_to_update = 5
-    word = strip_word(TEXT)
+    word = Utils.strip_word(TEXT)
 
 
 func can_interact(player):
     var current_words = Game.current_stage.current_words
     return text.visible_characters == text.text.length() and current_words[-1][-1] == word[0] and current_words.find(word) < 0
 
-
-func is_letter_or_digit(c):
-    return 'a' <= c and c <= 'z' or 'A' <= c and c <= 'Z' or '0' <= c and c <= '9'
-
-
-func strip_word(word: String):
-    word = word.strip_edges()
-    if word == "":
-        return ""
-    while not is_letter_or_digit(word[0]):
-        word = word.substr(1, word.length() - 1)
-    while not is_letter_or_digit(word[-1]):
-        word = word.substr(0, word.length() - 1)
-    return word
 
 
 func interact(player):
