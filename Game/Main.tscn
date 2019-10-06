@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Game/Main.gd" type="Script" id=1]
-[ext_resource path="res://Stages/Stage 0.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Stages/Stage 1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/SourceSansPro-Regular.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="Environment" id=1]
@@ -29,7 +29,7 @@ script = ExtResource( 1 )
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
 
-[node name="Stage 0" parent="." instance=ExtResource( 2 )]
+[node name="Stage 1" parent="." instance=ExtResource( 2 )]
 
 [node name="Completed" type="Label" parent="."]
 visible = false

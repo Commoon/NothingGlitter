@@ -2,15 +2,40 @@ extends Area2D
 
 class_name Interactable
 
+signal select_changed
+
+
+var selected = false
+
+
+func can_interact(player):
+    return true
+
 
 func interact(player):
-    pass
+    print(2)
+    select(false, player)
 
 
-func _on_Goal_body_entered(body):
-    body.to_interact = self
+func select(value, player):
+    selected = value
+    player.to_interact = self if selected else null
+    emit_signal("select_changed", value)
 
 
-func _on_Goal_body_exited(body):
+func _on_body_entered(body):
+    if not self.can_interact(body):
+        return
+    if body.to_interact != null:
+        body.to_interact.select(false, body)
+    select(true, body)
+
+
+func _on_body_exited(body):
     if body.to_interact == self:
-        body.to_interact = null
+        select(false, body)
+
+
+func _ready():
+    self.connect("body_entered", self, "_on_body_entered")
+    self.connect("body_exited", self, "_on_body_exited")

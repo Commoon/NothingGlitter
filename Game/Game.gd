@@ -33,3 +33,4 @@ func next_stage():
     main_scene.get_node("Completed").hide()
     get_tree().paused = false
     paused = false
+

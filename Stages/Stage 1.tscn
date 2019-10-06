@@ -1,7 +1,22 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Stages/Stage 1.gd" type="Script" id=1]
 [ext_resource path="res://Stages/StageManager.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Items/Words.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Square.png" type="Texture" id=4]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 2
+emission_box_extents = Vector3( 640, 272, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.02
+scale_random = 0.15
+hue_variation = -1.0
+hue_variation_random = 0.5
 
 [node name="Stage 1" type="Node2D"]
 script = ExtResource( 1 )
@@ -9,3 +24,24 @@ STAGE_NUMBER = 1
 
 [node name="StageManager" parent="." instance=ExtResource( 2 )]
 
+[node name="Words" parent="." instance=ExtResource( 3 )]
+position = Vector2( 741.763, 140.334 )
+TEXT = "All that is gold
+does not glitter."
+
+[node name="GlittersBackground" type="Sprite" parent="."]
+modulate = Color( 0.0392157, 0.0392157, 0.0392157, 1 )
+position = Vector2( 0, 416 )
+scale = Vector2( 20, 8.5 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="Glitters" type="Particles2D" parent="."]
+position = Vector2( 640, 688 )
+amount = 10000
+randomness = 0.55
+local_coords = false
+process_material = SubResource( 1 )
+texture = ExtResource( 4 )
+
+[connection signal="typing_end" from="StageManager" to="." method="_on_StageManager_typing_end"]

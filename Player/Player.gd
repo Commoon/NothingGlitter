@@ -20,4 +20,6 @@ func _input(event):
         return
     if event.is_action_released("search") and to_interact != null:
         to_interact.call("interact", self)
+    elif event.is_action_released("cancel"):
+        Game.current_stage.remove_word()
 

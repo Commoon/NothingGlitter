@@ -19,9 +19,8 @@ func _process(delta):
         paused += delta
         if paused >= PAUSE_TIME:
             paused = -1
-    
 
 
 func _unhandled_input(event):
-    if paused < 0 and event.is_action_released("search"):
+    if paused < 0 and (event.is_action_released("search") or event.is_action_released("cancel")):
         Game.next_stage()
