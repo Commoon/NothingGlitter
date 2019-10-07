@@ -5,7 +5,7 @@ const Star = preload("res://Items/Star.tscn")
 export var STAR_NUMBER = 5
 export var SCATTER_SPEED = 5.0
 export var MAX_RANDOM_TIMES = 5
-export var STAR_RANGE_X = [680, 1200]
+export var STAR_RANGE_X = [0, 1200]
 export var STAR_RANGE_Y = [32, 192]
 
 onready var subview = $Viewport
