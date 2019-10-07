@@ -7,10 +7,11 @@ onready var glitters = $Glitters
 
 
 func _ready():
-    var box = (glitters.process_material as ParticlesMaterial).emission_box_extents
-    var x = (randf() * 2 - 1) * box.x * 0.9
-    var y = (randf() * 2 - 1) * box.y * 0.9
-    stage_manager.goal_position = Vector2(x, y) + glitters.position
+    # var box = (glitters.process_material as ParticlesMaterial).emission_box_extents
+    # var x = (randf() * 2 - 1) * box.x * 0.9
+    # var y = (randf() * 2 - 1) * box.y * 0.9
+    # stage_manager.goal_position = Vector2(x, y) + glitters.position
+    pass
 
 
 func update_glitters(text):

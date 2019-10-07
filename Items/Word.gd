@@ -60,15 +60,17 @@ func set_text(value):
         text.show()
         wait_to_update = 5
     word = Utils.strip_word(TEXT)
+    item_name = "word-%s" % word
 
 
 func can_interact(player):
     var current_words = Game.current_stage.current_words
-    return text.visible_characters == text.text.length() and current_words[-1][-1] == word[0] and current_words.find(word) < 0
+    return text.visible_characters == text.text.length() and \
+        current_words[-1][-1].to_lower() == word[0].to_lower() and \
+        current_words.find(word) < 0
 
 
 
 func interact(player):
     Game.current_stage.add_word(word)
-    print(1)
     .interact(player)

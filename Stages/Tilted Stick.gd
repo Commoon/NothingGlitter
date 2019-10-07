@@ -3,7 +3,6 @@ extends Stage
 export var ROTATE_SPEED = 1.5
 
 onready var stick = $Stick
-onready var words = $Words
 onready var stick_bottom = stick.position + Vector2.DOWN * 256.0
 
 var started = false
@@ -21,7 +20,7 @@ func _physics_process(delta):
         if not reversed and (stick.position + 256.0 * direction).x >= 1280:
             started = false
             if first_time:
-                words.display()
+                $Words1.display()
                 first_time = false
         elif reversed and stick.rotation <= 0:
             started = false
@@ -42,3 +41,8 @@ func update_stick(text):
 func _on_StageManager_typing_end(text):
     if not first_time:
         update_stick(text)
+
+
+func _on_Potato_interacted(potato):
+    potato.queue_free()
+    $Words2.display()

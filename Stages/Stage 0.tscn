@@ -1,8 +1,11 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Stages/Stage.gd" type="Script" id=1]
-[ext_resource path="res://Stages/StageManager.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Game/StageManager.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=3]
+
+
+
 
 [node name="Stage 0" type="Node2D"]
 script = ExtResource( 1 )

@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Stages/Gold Experience.gd" type="Script" id=1]
+[ext_resource path="res://Game/StageManager.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Items/Maze.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=4]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 796.476, 954.753, -23.3826, 78.4986, 23.3826, -78.4986, 798.063, 738.966, 0, 0, 0, 0, 718.729, 611.273, -63.467, 53.4459, 63.467, -53.4459, 737.769, 475.147, 0, 0, 0, 0, 721.902, 280.455 )
+}
+
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 1047.17, 951.58, 50.1055, -26.7229, -50.1055, 26.7229, 1048.76, 737.379, 15.0317, 26.7229, -15.0317, -26.7229, 926.583, 588.232, -43.4248, 15.0317, 43.4248, -15.0317, 929.757, 477.165, 0, 0, 0, 0, 983.704, 293.11 )
+}
+
+[sub_resource type="Curve2D" id=3]
+_data = {
+"points": PoolVector2Array( -43.4248, 68.4775, 43.4248, -68.4775, 480.728, 962.687, 0, 0, 0, 0, 479.141, 804.019, -11.6913, 150.317, 11.6913, -150.317, 412.501, 662.805, 0, 0, 0, 0, 537.848, 407.351, 0, 0, 0, 0, 534.675, 285.177 )
+}
+
+[node name="Gold Experience" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="StageManager" parent="." instance=ExtResource( 2 )]
+goal_position = Vector2( 992, 800 )
+
+[node name="Maze" parent="." instance=ExtResource( 3 )]
+tile_data = PoolIntArray( 262144, 1, 0, 262145, 1, 0, 262146, 1, 0, 262147, 1, 0, 262148, 1, 0, 262149, 1, 0, 262152, 10, 0, 262153, 1, 0, 262154, 1, 0, 262155, 1, 0, 262156, 1, 0, 262157, 1, 0, 262158, 1, 0, 262159, 1, 0, 262160, 1, 0, 262161, 1, 0, 262162, 1, 0, 262163, 1, 0, 327688, 0, 0, 393220, 3, 0, 393221, 1, 0, 393222, 10, 0, 393223, 1, 0, 393224, 5, 0, 458754, 1, 0, 458755, 1, 0, 458756, 5, 0, 458758, 0, 0, 458763, 3, 0, 458764, 1, 0, 458765, 1, 0, 458766, 10, 0, 458767, 1, 0, 458768, 1, 0, 458769, 12, 0, 524294, 0, 0, 524299, 0, 0, 524302, 0, 0, 589830, 0, 0, 589833, 1, 0, 589834, 1, 0, 589835, 5, 0, 589838, 0, 0, 589840, 14, 0, 589841, 1, 0, 589842, 1, 0, 589843, 1, 0, 655360, 1, 0, 655364, 4, 0, 655366, 11, 0, 655374, 0, 0, 720900, 0, 0, 720908, 3, 0, 720909, 1, 0, 720910, 8, 0, 720911, 1, 0, 720912, 4, 0, 786436, 0, 0, 786439, 3, 0, 786440, 1, 0, 786441, 4, 0, 786444, 0, 0, 786448, 0, 0, 851972, 0, 0, 851975, 0, 0, 851977, 0, 0, 851980, 0, 0, 851982, 14, 0, 851983, 1, 0, 851984, 5, 0, 917508, 0, 0, 917511, 0, 0, 917513, 0, 0, 917516, 0, 0 )
+
+[node name="Player" parent="." instance=ExtResource( 4 )]
+position = Vector2( 440, 70 )
+
+[node name="Paths" type="Node2D" parent="."]
+
+[node name="Path2D" type="Path2D" parent="Paths"]
+curve = SubResource( 1 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Paths/Path2D"]
+position = Vector2( 796.476, 954.753 )
+rotation = -1.71892
+
+[node name="Path2D2" type="Path2D" parent="Paths"]
+editor/display_folded = true
+curve = SubResource( 2 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Paths/Path2D2"]
+position = Vector2( 1047.17, 951.58 )
+rotation = -1.3643
+
+[node name="Path2D3" type="Path2D" parent="Paths"]
+editor/display_folded = true
+curve = SubResource( 3 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Paths/Path2D3"]
+position = Vector2( 480.728, 962.687 )
+rotation = -1.02408
+
+[node name="Plants" type="Node2D" parent="."]
+
+[connection signal="started" from="StageManager" to="." method="_on_StageManager_started"]

@@ -2,9 +2,7 @@ extends Node2D
 
 class_name Stage
 
-export var STAGE_NUMBER: int = 0
-
-onready var stage_manager: StageManager = $StageManager
+onready var stage_manager = $StageManager
 
 const COLORS = ["red", "blue", "green", "cyan", "yellow", "purple"]
 var color_index = -1
@@ -21,7 +19,7 @@ func _enter_tree():
 
 func add_word(word):
     var title_text = stage_manager.title_text as RichTextLabel
-    if title_text.text[-1] != word[0]:
+    if title_text.text[-1].to_lower() != word[0].to_lower():
         return
     var bbcode = title_text.bbcode_text
     color_index = (color_index + 1) % COLORS.size()
@@ -44,7 +42,7 @@ func remove_word():
     var word = current_words.pop_back()
     var to_delete_length = word.length() + COLORS[color_index].length() + "[color=] [/color]".length() + 1
     var bbcode = title_text.bbcode_text
-    var new_bbcode = "%s%c" % [bbcode.substr(0, bbcode.length() - to_delete_length), word[0]]
+    var new_bbcode = "%s%c" % [bbcode.substr(0, bbcode.length() - to_delete_length), current_words[-1][-1]]
     title_text.bbcode_text = new_bbcode
     var n = title_text.text.length()
     title_text.visible_characters = n

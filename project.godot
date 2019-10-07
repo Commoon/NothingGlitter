@@ -22,7 +22,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "StageManager",
 "language": "GDScript",
-"path": "res://Stages/StageManager.gd"
+"path": "res://Game/StageManager.gd"
 } ]
 _global_script_class_icons={
 "Interactable": "",

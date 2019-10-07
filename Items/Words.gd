@@ -1,6 +1,6 @@
 tool
 extends Node2D
-export var typing_speed = 4.5
+export var typing_speed = 8
 export var LINE_HEIGHT = 48
 export (String, MULTILINE) var TEXT = "" setget set_text
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Stages/StageManager.gd" type="Script" id=1]
+[ext_resource path="res://Game/StageManager.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Square.png" type="Texture" id=2]
 [ext_resource path="res://Assets/CanvasItemMaterial.tres" type="Material" id=3]
 [ext_resource path="res://Assets/TitleText.tres" type="DynamicFont" id=4]
@@ -43,9 +43,9 @@ scroll_active = false
 [node name="Goal" parent="." instance=ExtResource( 5 )]
 visible = false
 position = Vector2( 1040, 720 )
-collision_layer = 2
 
 [node name="Bounds" type="StaticBody2D" parent="."]
+collision_layer = 8
 
 [node name="Top" type="CollisionShape2D" parent="Bounds"]
 position = Vector2( 640, -10 )

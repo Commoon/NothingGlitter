@@ -8,6 +8,7 @@ var paused = 0
 
 func _ready():
     pause_mode = Node.PAUSE_MODE_PROCESS
+    Game.start(4)
 
 
 func _enter_tree():

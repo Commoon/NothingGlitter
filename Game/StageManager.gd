@@ -15,14 +15,12 @@ var started = false
 var showing_player = -1
 var typing = -1
 
-onready var stage = get_parent()
-
 
 func _ready():
     title_text.visible_characters = 0
     goal.hide()
     set_goal_position(goal_position)
-    title_text.bbcode_text = "Stage %d: Nothing" % stage.STAGE_NUMBER
+    title_text.bbcode_text = "Stage %d: Nothing" % Game.current_stage_number
     typing = 0
     showing_player = 0
 

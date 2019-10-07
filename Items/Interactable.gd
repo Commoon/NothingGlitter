@@ -2,7 +2,10 @@ extends Area2D
 
 class_name Interactable
 
+export var item_name = "interactable"
+
 signal select_changed
+signal interacted
 
 
 var selected = false
@@ -13,7 +16,7 @@ func can_interact(player):
 
 
 func interact(player):
-    print(2)
+    emit_signal("interacted", self)
     select(false, player)
 
 
