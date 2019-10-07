@@ -1,6 +1,17 @@
 tool
 extends Node
 
+const WORD_SOUND_EFFECTS = [
+    preload("res://Assets/sfx/do.wav"),
+    preload("res://Assets/sfx/re.wav"),
+    preload("res://Assets/sfx/mi.wav"),
+    preload("res://Assets/sfx/fa.wav"),
+    preload("res://Assets/sfx/so.wav")
+]
+const COMPLETE_SOUND_EFFECT = preload("res://Assets/sfx/complete.wav")
+const HIT_SOUND_EFFECT = preload("res://Assets/sfx/hit.wav")
+
+var se_player: AudioStreamPlayer = null
 
 func is_letter_or_digit(c):
     return 'a' <= c and c <= 'z' or 'A' <= c and c <= 'Z' or '0' <= c and c <= '9'
@@ -23,3 +34,22 @@ func check_phrase(phrase: String, text = null):
     text = text.to_lower()
     phrase = phrase.to_lower()
     return text.find(phrase) >= 0
+
+
+func play_sound(stream):
+    if se_player == null:
+        return
+    se_player.stream = stream
+    se_player.play()
+    
+
+func play_word_sound(i):
+    play_sound(WORD_SOUND_EFFECTS[i % WORD_SOUND_EFFECTS.size()])
+
+
+func play_complete_sound():
+    play_sound(COMPLETE_SOUND_EFFECT)
+
+
+func play_hit_sound():
+    play_sound(HIT_SOUND_EFFECT)

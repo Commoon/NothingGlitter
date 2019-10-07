@@ -21,42 +21,58 @@ tile_data = PoolIntArray( 262144, 12, 0, 262146, 14, 0, 262147, 1, 0, 262148, 1,
 [node name="ArrowSet" parent="Node2D" instance=ExtResource( 4 )]
 position = Vector2( -64, 352 )
 SPEED = 800.0
+PAUSE = 0.8
+START_VALUE = 0.0
+END_VALUE = 1408.0
+TO_RIGHT = true
 
 [node name="ArrowSet2" parent="Node2D" instance=ExtResource( 4 )]
 position = Vector2( 1344, 480 )
 rotation = -1.5708
 SPEED = 960.0
+PAUSE = 0.8
+START_VALUE = 0.0
+END_VALUE = 1408.0
 TO_RIGHT = false
 
 [node name="ArrowSet3" parent="Node2D" instance=ExtResource( 4 )]
 position = Vector2( -64, 608 )
 SPEED = 1080.0
+PAUSE = 0.8
+START_VALUE = 0.0
+END_VALUE = 1408.0
+TO_RIGHT = true
 
 [node name="ArrowSet4" parent="Node2D" instance=ExtResource( 4 )]
 position = Vector2( 1344, 736 )
 rotation = -1.5708
 SPEED = 1440.0
+PAUSE = 0.8
+START_VALUE = 0.0
+END_VALUE = 1408.0
 TO_RIGHT = false
 
 [node name="ArrowSet5" parent="Node2D" instance=ExtResource( 4 )]
 position = Vector2( -64, 864 )
+SPEED = 1600.0
+PAUSE = 0.8
+START_VALUE = 0.0
+END_VALUE = 1408.0
+TO_RIGHT = true
 
 [node name="Words" type="Node2D" parent="."]
 
 [node name="Words" parent="Words" instance=ExtResource( 5 )]
 position = Vector2( 64, 454 )
-typing_speed = 8
 TEXT = "Life is a horizontal fall."
 
 [node name="Words2" parent="Words" instance=ExtResource( 5 )]
 position = Vector2( 64, 556 )
-typing_speed = 8
 TEXT = "Nobody goes through life
 without a scar."
 
 [node name="Words3" parent="Words" instance=ExtResource( 5 )]
 position = Vector2( 64, 684 )
-typing_speed = 8
 TEXT = "The straight line leads to
 the downfall of humanity."
 

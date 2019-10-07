@@ -40,3 +40,5 @@ text = "Clear!"
 align = 1
 valign = 1
 
+[node name="SEPlayer" type="AudioStreamPlayer" parent="."]
+

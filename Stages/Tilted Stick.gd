@@ -46,4 +46,5 @@ func _on_StageManager_typing_end(text):
 
 func _on_Potato_interacted(potato):
     potato.queue_free()
+    Utils.play_complete_sound()
     $Words2.display()

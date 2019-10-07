@@ -33,6 +33,9 @@ _data = {
 
 [node name="Gold Experience" type="Node2D"]
 script = ExtResource( 1 )
+FLOWER_HUE = [ 0.85, 1.15 ]
+FLOWER_SATURATION = [ 0.35, 0.75 ]
+FLOWER_LIGHTNESS = [ 0.65, 0.8 ]
 
 [node name="StageManager" parent="." instance=ExtResource( 2 )]
 goal_position = Vector2( 1120, 800 )
@@ -50,7 +53,6 @@ always remain special."
 
 [node name="Words2" parent="." instance=ExtResource( 4 )]
 position = Vector2( 25.8471, 693.792 )
-typing_speed = 8
 TEXT = "You don't have
 to be born
 beautiful to be

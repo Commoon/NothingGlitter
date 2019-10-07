@@ -27,6 +27,7 @@ func _on_StageManager_started():
 
 
 func _on_hit(arrow):
+    Utils.play_hit_sound()
     player.position = start_point
 
 

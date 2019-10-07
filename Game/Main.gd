@@ -8,6 +8,7 @@ var paused = 0
 
 func _ready():
     Game.start(0)
+    Utils.se_player = $SEPlayer
 
 
 func _enter_tree():

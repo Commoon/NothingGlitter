@@ -31,6 +31,7 @@ func add_word(word):
         word.substr(1, word.length() - 1)
     ]
     current_words.append(word)
+    Utils.play_word_sound(current_words.size() - 2)
     title_text.bbcode_text = new_bbcode
 
 
@@ -61,4 +62,5 @@ func finish_sentence():
         return
     var title_text = stage_manager.title_text as RichTextLabel
     title_text.bbcode_text += "."
+    Utils.play_complete_sound()
     sentence_finished = true

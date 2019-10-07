@@ -32,8 +32,9 @@ _global_script_class_icons={
 
 [application]
 
-config/name="NothingGlitter"
+config/name="Nothing Glitter"
 run/main_scene="res://Game/Main.tscn"
+config/icon="res://Assets/icon.png"
 
 [autoload]
 

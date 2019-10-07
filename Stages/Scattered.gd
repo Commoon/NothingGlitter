@@ -85,6 +85,7 @@ func _on_StageManager_started():
 func _on_interact(star):
     star.queue_free()
     remaining_stars -= 1
+    Utils.play_complete_sound()
     if remaining_stars <= 0:
         $Words2.display()
 
