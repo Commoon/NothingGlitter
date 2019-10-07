@@ -12,6 +12,7 @@ func _process(delta):
     waiting += delta
     if waiting > WAITING_TIME:
         credit_ended = true
+        $Label2.show()
 
 
 func _unhandled_input(event):

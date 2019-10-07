@@ -29,6 +29,7 @@ Presented by Commoon Labs:
 align = 1
 
 [node name="Label2" type="Label" parent="."]
+visible = false
 margin_left = 844.792
 margin_top = 882.883
 margin_right = 1249.79

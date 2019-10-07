@@ -7,7 +7,7 @@ var paused = 0
 
 
 func _ready():
-    Game.start(5)
+    Game.start(0)
     Utils.se_player = $SEPlayer
     Utils.word_player = $WordPlayer
 

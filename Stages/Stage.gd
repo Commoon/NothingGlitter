@@ -4,7 +4,7 @@ class_name Stage
 
 onready var stage_manager = $StageManager
 
-const COLORS = ["red", "blue", "green", "cyan", "yellow", "purple"]
+const COLORS = ["red", "blue", "green", "navy", "yellow", "purple"]
 var color_index = -1
 var current_words = ["Nothing"]
 var sentence_finished = false
