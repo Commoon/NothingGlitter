@@ -32,7 +32,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Nothing Glitter"
+config/name="Nothing Ground Down Nothing"
 run/main_scene="res://Game/Main.tscn"
 config/icon="res://Assets/icon.png"
 
