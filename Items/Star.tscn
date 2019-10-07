@@ -7,9 +7,11 @@
 radius = 40.0
 
 [node name="Star" type="Area2D"]
-scale = Vector2( 0.852422, 0.852422 )
+rotation = 1.39273
+scale = Vector2( 0.98961, 0.98961 )
 collision_layer = 2
 script = ExtResource( 1 )
+SCALE_RANGE = [ 0.7, 1.0 ]
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )

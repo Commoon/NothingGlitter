@@ -42,3 +42,6 @@ valign = 1
 
 [node name="SEPlayer" type="AudioStreamPlayer" parent="."]
 
+[node name="WordPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -20.0
+

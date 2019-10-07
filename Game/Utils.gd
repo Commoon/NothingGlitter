@@ -12,6 +12,7 @@ const COMPLETE_SOUND_EFFECT = preload("res://Assets/sfx/complete.wav")
 const HIT_SOUND_EFFECT = preload("res://Assets/sfx/hit.wav")
 
 var se_player: AudioStreamPlayer = null
+var word_player: AudioStreamPlayer = null
 
 func is_letter_or_digit(c):
     return 'a' <= c and c <= 'z' or 'A' <= c and c <= 'Z' or '0' <= c and c <= '9'
@@ -36,20 +37,20 @@ func check_phrase(phrase: String, text = null):
     return text.find(phrase) >= 0
 
 
-func play_sound(stream):
-    if se_player == null:
+func play_sound(player, stream):
+    if player == null:
         return
-    se_player.stream = stream
-    se_player.play()
+    player.stream = stream
+    player.play()
     
 
 func play_word_sound(i):
-    play_sound(WORD_SOUND_EFFECTS[i % WORD_SOUND_EFFECTS.size()])
+    play_sound(word_player, WORD_SOUND_EFFECTS[i % WORD_SOUND_EFFECTS.size()])
 
 
 func play_complete_sound():
-    play_sound(COMPLETE_SOUND_EFFECT)
+    play_sound(se_player, COMPLETE_SOUND_EFFECT)
 
 
 func play_hit_sound():
-    play_sound(HIT_SOUND_EFFECT)
+    play_sound(se_player, HIT_SOUND_EFFECT)

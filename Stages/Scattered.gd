@@ -3,10 +3,10 @@ extends Stage
 const Star = preload("res://Items/Star.tscn")
 
 export var STAR_NUMBER = 5
-export var SCATTER_SPEED = 700.0
-export var MAX_RANDOM_TIMES = 1000.0
-export var STAR_RANGE_X = [32, 298]
-export var STAR_RANGE_Y = [256, 896]
+export var SCATTER_SPEED = 5.0
+export var MAX_RANDOM_TIMES = 5
+export var STAR_RANGE_X = [680, 1200]
+export var STAR_RANGE_Y = [32, 192]
 
 onready var subview = $Viewport
 onready var sprite = $Sprite
@@ -15,20 +15,21 @@ onready var stars = $Stars
 onready var maze = $Viewport/Maze
 
 var started = false
-var reversed = false
+var recovering = false
 var random_times = MAX_RANDOM_TIMES
 var remaining_stars = -1
 
 
 func _ready():
-    var p = (STAR_RANGE_Y[1] - STAR_RANGE_Y[0]) / STAR_NUMBER
+    var p = (STAR_RANGE_X[1] - STAR_RANGE_X[0]) / STAR_NUMBER
     for i in range(STAR_NUMBER):
         var star = Star.instance()
         star.position = Vector2(
-            rand_range(STAR_RANGE_X[0], STAR_RANGE_X[1]),
-            STAR_RANGE_Y[0] + p * i + rand_range(0, p)
+            STAR_RANGE_X[0] + p * i + rand_range(0, p),
+            rand_range(STAR_RANGE_Y[0], STAR_RANGE_Y[1])
         )
         star.connect("interacted", self, "_on_interact")
+        star.connect("dropped", self, "_on_star_dropped")
         stars.add_child(star)
     remaining_stars = stars.get_child_count()
     scatter()
@@ -43,16 +44,17 @@ func scatter():
         remove_child(maze)
         subview.add_child(maze)
     started = true
-    reversed = false
+    recovering = false
     block.disabled = false
 
 
 func recover():
     started = true
-    reversed = true
+    recovering = true
     
 
 func recover_end():
+    started = false
     var goal = stage_manager.goal
     if goal.get_parent() == subview:
         subview.remove_child(goal)
@@ -66,14 +68,13 @@ func recover_end():
 func _process(delta):
     if not started:
         return
-    random_times += delta * SCATTER_SPEED * (-1 if reversed else 1)
-    if reversed and random_times <= 0:
-        self.random_times = 0
-        started = false
-        recover_end()
-    elif not reversed and random_times >= MAX_RANDOM_TIMES:
-        self.random_times = MAX_RANDOM_TIMES
-        started = false
+    random_times += delta * SCATTER_SPEED
+    if random_times >= MAX_RANDOM_TIMES:
+        if recovering:
+            random_times = 0
+            recover_end()
+        else:
+            random_times = 1
     var mat = sprite.get_material()
     mat.set_shader_param("random_times", floor(random_times))
 
@@ -83,10 +84,14 @@ func _on_StageManager_started():
 
 
 func _on_interact(star):
-    star.queue_free()
-    remaining_stars -= 1
+    star.drop()
     Utils.play_complete_sound()
+
+
+func _on_star_dropped():
+    remaining_stars -= 1
     if remaining_stars <= 0:
+        Utils.play_complete_sound()
         $Words2.display()
 
 

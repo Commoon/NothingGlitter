@@ -9,7 +9,7 @@ const STAGE_NAMES = [
     "Ending"
 ]
 
-var current_stage: Stage = null
+var current_stage = null
 var current_stage_number = 0
 var main_scene: Node = null
 var player = null
@@ -36,11 +36,11 @@ func next_stage():
 func start(index):
     if index > STAGE_NAMES.size():
         return
+    if current_stage != null:
+        current_stage.queue_free()
     current_stage_number = index
     var stage_name = STAGE_NAMES[index]
     var stage_scene = load("res://Stages/%s.tscn" % stage_name)
-    if current_stage != null:
-        current_stage.queue_free()
     var new_stage = stage_scene.instance()
     var world_environment = main_scene.get_node("WorldEnvironment")
     main_scene.add_child_below_node(world_environment, new_stage)
@@ -48,3 +48,4 @@ func start(index):
     main_scene.get_node("Completed").hide()
     get_tree().paused = false
     paused = false
+    current_stage = new_stage
