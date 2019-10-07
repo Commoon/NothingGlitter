@@ -117,6 +117,7 @@ func grow():
 
 
 func _on_Memory_interacted(memory):
+    Utils.play_complete_sound()
     $Words2.display()
     memory.queue_free()
 
