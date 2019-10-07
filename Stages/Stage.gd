@@ -7,6 +7,7 @@ onready var stage_manager = $StageManager
 const COLORS = ["red", "blue", "green", "cyan", "yellow", "purple"]
 var color_index = -1
 var current_words = ["Nothing"]
+var sentence_finished = false
 
 
 func _ready():
@@ -37,11 +38,15 @@ func remove_word():
     if current_words.size() <= 1:
         return
     var title_text = stage_manager.title_text as RichTextLabel
+    var bbcode = title_text.bbcode_text
+    if sentence_finished:
+        bbcode = bbcode.substr(0, bbcode.length() - 1)
+        title_text.bbcode_text = bbcode
+        sentence_finished = false
     if not title_text.text.ends_with(current_words[-1]):
         return
     var word = current_words.pop_back()
     var to_delete_length = word.length() + COLORS[color_index].length() + "[color=] [/color]".length() + 1
-    var bbcode = title_text.bbcode_text
     var new_bbcode = "%s%c" % [bbcode.substr(0, bbcode.length() - to_delete_length), current_words[-1][-1]]
     title_text.bbcode_text = new_bbcode
     var n = title_text.text.length()
@@ -49,3 +54,11 @@ func remove_word():
     stage_manager.typing = n
     stage_manager.emit_signal("typing_end", title_text.text)
     color_index = (color_index - 1) % COLORS.size()
+
+
+func finish_sentence():
+    if sentence_finished:
+        return
+    var title_text = stage_manager.title_text as RichTextLabel
+    title_text.bbcode_text += "."
+    sentence_finished = true

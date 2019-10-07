@@ -7,7 +7,6 @@
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Square.png" type="Texture" id=6]
 
-
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 2
 emission_box_extents = Vector3( 640, 100, 1 )
@@ -29,6 +28,7 @@ goal_position = Vector2( 480, 864 )
 
 [node name="Words" parent="." instance=ExtResource( 3 )]
 position = Vector2( 866.509, 326.334 )
+typing_speed = 8
 TEXT = "All that is gold
 does not glitter."
 

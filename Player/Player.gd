@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export var SPEED: float = 300
+export var SPEED: float = 500
 var velocity = Vector2.ZERO
 
 var to_interact: Node2D = null

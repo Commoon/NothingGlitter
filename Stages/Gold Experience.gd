@@ -15,25 +15,30 @@ export var FLOWER_LIGHTNESS = [0.7, 0.7]
 const Flower = preload("res://Items/Flower.tscn")
 
 var paths = []
-var started = 0
+var growing = 0
+var reversed = false
+var started = false
+var first_time = true
 onready var plants = $Plants
 
 
 func _ready():
     $Memory.position = $Player.position
     $Memory.hide()
+    growing = paths.size()
     for each in $Paths.get_children():
         var path = each.get_node("PathFollow2D") as PathFollow2D
         var stem = Line2D.new()
         stem.default_color = STEM_COLOR
-        stem.points = [path.position]
-        paths.append([path, stem, 0.0, 0])
+        stem.points = [path.global_position]
+        paths.append([path, stem, 0.0, []])
         plants.add_child(stem)
 
 
 func _on_StageManager_started():
     $Memory.show()
-    started = paths.size()
+    grow()
+    $Words.display()
 
 
 func grow_flower(pos, rot):
@@ -47,37 +52,85 @@ func grow_flower(pos, rot):
     flower.position = flower_position
     plants.add_child(flower)
     flower.grow(GROW_FLOWER_SPEED, GROW_FLOWER_ROTATION, target_scale, Color.from_hsv(h, s, v))
+    return flower
 
 
 func _physics_process(delta):
-    if started <= 0:
+    if not started:
         return
     for each in paths:
         var path = each[0] as PathFollow2D
         var stem = each[1] as Line2D
         var progress = each[2] as float
-        var n_flowers = each[3] as int
-        if progress >= 1.0 + GROW_DELAY:
-            continue
-        var speed = rand_range(GROW_SPEED[0], GROW_SPEED[1])
-        progress += speed * delta
-        if progress >= 1.0:
-            path.unit_offset = 1.0
+        var flowers = each[3] as Array
+        if not reversed:
             if progress >= 1.0 + GROW_DELAY:
-                started -= 1
+                continue
+            var speed = rand_range(GROW_SPEED[0], GROW_SPEED[1])
+            progress += speed * delta
+            if progress >= 1.0:
+                path.unit_offset = 1.0
+                if progress >= 1.0 + GROW_DELAY:
+                    growing -= 1
+                    if growing == 0:
+                        started = false
+            else:
+                path.unit_offset = progress
+            for i in range(floor((progress - GROW_DELAY) / GROW_F) - flowers.size()):
+                var p = path.unit_offset
+                path.unit_offset = progress - GROW_DELAY
+                flowers.append(grow_flower(path.global_position, path.rotation))
+                path.unit_offset = p
+            if path.unit_offset < 1.0:
+                stem.add_point(path.global_position)
+            each[2] = progress
         else:
-            path.unit_offset = progress
-        for i in range(floor((progress - GROW_DELAY) / GROW_F) - n_flowers):
-            n_flowers += 1
-            var p = path.unit_offset
-            path.unit_offset = progress - GROW_DELAY
-            grow_flower(path.position, path.rotation)
-            path.unit_offset = p
-        if path.unit_offset < 1.0:
-            stem.add_point(path.position)
-        each[2] = progress
-        each[3] = n_flowers
+            if progress <= 0.0:
+                continue
+            var speed = rand_range(GROW_SPEED[0], GROW_SPEED[1])
+            progress -= speed * delta
+            if progress <= GROW_DELAY:
+                path.unit_offset = 0.0
+                if progress <= 0:
+                    growing += 1
+                    if growing == paths.size():
+                        started = false
+            else:
+                path.unit_offset = progress - GROW_DELAY
+            for i in range(flowers.size()  - floor((progress - GROW_DELAY) / GROW_F)):
+                var flower = flowers.pop_back()
+                if flower != null:
+                    flower.wither()
+            each[2] = progress
 
 
-func _on_Memory_interacted():
-    pass # Replace with function body.
+func wither():
+    started = true
+    reversed = true
+    for each in paths:
+        each[1].points = []
+
+
+func grow():
+    started = true
+    reversed = false
+
+
+func _on_Memory_interacted(memory):
+    $Words2.display()
+    memory.queue_free()
+
+
+func update_flowers(text):
+    if Utils.check_phrase("Nothing grew wildly", text):
+        finish_sentence()
+        wither()
+    else:
+        grow()
+
+
+func _on_StageManager_typing_end(text):
+    if first_time:
+        first_time = false
+        return
+    update_flowers(text)

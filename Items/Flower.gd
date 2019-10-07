@@ -7,6 +7,7 @@ const TEXTURES = [
 ]
 
 var growing = false
+var withering = false
 var target_scale = 0.0
 var grow_speed = 0.0
 var grow_rotation_speed = 0.0
@@ -25,12 +26,24 @@ func grow(speed, rotation_speed, target_scale, color):
     growing = true
 
 
+func wither():
+    withering = true
+
+
 func _process(delta):
-    if not growing:
-        return
-    var p = scale.x + grow_speed * delta
-    if p >= target_scale:
-        p = target_scale
-        growing = false
-    scale = Vector2.ONE * p
-    rotate(grow_rotation_speed * delta)
+    if growing:
+        var p = scale.x + grow_speed * delta
+        if p >= target_scale:
+            p = target_scale
+            growing = false
+        scale = Vector2.ONE * p
+        rotate(grow_rotation_speed * delta)
+    elif withering:
+        var p = scale.x - grow_speed * delta
+        if p <= 0:
+            scale = Vector2.ZERO
+            withering = false
+            queue_free()
+        else:
+            scale = Vector2.ONE * p
+        rotate(grow_rotation_speed * delta)

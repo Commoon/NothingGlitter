@@ -32,6 +32,7 @@ func _physics_process(delta):
 
 func update_stick(text):
     if Utils.check_phrase("Nothing got tilted", text):
+        finish_sentence()
         reversed = true
     else:
         reversed = false

@@ -16,6 +16,7 @@ func _ready():
 
 func update_glitters(text):
     if Utils.check_phrase("Nothing glitter", text):
+        finish_sentence()
         glitters_background.hide()
         glitters.emitting = false
     elif not $GlittersBackground.visible:

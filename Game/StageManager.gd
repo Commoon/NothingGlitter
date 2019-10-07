@@ -5,7 +5,7 @@ signal started
 
 class_name StageManager
 
-export var typing_speed = 4.5
+export var typing_speed = 6
 export var starting_pause = 0.5
 export var goal_position = Vector2(1040, 720) setget set_goal_position
 

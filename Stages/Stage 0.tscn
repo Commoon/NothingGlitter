@@ -4,9 +4,6 @@
 [ext_resource path="res://Game/StageManager.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=3]
 
-
-
-
 [node name="Stage 0" type="Node2D"]
 script = ExtResource( 1 )
 

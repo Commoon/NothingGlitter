@@ -4,6 +4,8 @@ const STAGE_NAMES = [
     "Stage 0", "Simple Maze",
     "Glitters", "Tilted Stick",
     "Gold Experience",
+    "Scattered",
+    "Arrows",
     "Ending"
 ]
 
