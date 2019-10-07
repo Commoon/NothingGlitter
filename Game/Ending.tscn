@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Stages/Ending.gd" type="Script" id=1]
+[ext_resource path="res://Game/Ending.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Square.png" type="Texture" id=2]
 [ext_resource path="res://Assets/TitleText.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Assets/WordFont.tres" type="DynamicFont" id=4]
@@ -30,11 +30,11 @@ align = 1
 
 [node name="Label2" type="Label" parent="."]
 visible = false
-margin_left = 844.792
+margin_left = 863.837
 margin_top = 882.883
-margin_right = 1249.79
+margin_right = 1258.84
 margin_bottom = 941.883
 custom_fonts/font = ExtResource( 4 )
-text = "Press A to Restart..."
-align = 1
+text = "Press A to restart..."
+align = 2
 

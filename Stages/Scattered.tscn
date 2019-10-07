@@ -58,7 +58,7 @@ tile_data = PoolIntArray( 262149, 13, 0, 262150, 14, 0, 262151, 1, 0, 262152, 10
 [node name="Words" parent="." instance=ExtResource( 4 )]
 position = Vector2( 30, 348 )
 typing_speed = 20
-TEXT = "The stars are 
+TEXT = "The stars are
 scattered all
 over the
 sky like

@@ -40,6 +40,17 @@ text = "Clear!"
 align = 1
 valign = 1
 
+[node name="ReturnToMenu" type="Label" parent="."]
+visible = false
+margin_left = 300.0
+margin_top = 420.0
+margin_right = 980.0
+margin_bottom = 521.0
+custom_fonts/font = SubResource( 2 )
+text = "Return to Menu?"
+align = 1
+valign = 1
+
 [node name="SEPlayer" type="AudioStreamPlayer" parent="."]
 
 [node name="WordPlayer" type="AudioStreamPlayer" parent="."]

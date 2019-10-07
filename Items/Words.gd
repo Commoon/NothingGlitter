@@ -82,7 +82,8 @@ func set_text(value):
         if not first_line:
             words.append("\n")
         for word in line.split(" "):
-            words.append(word)
+            if not word.empty():
+                words.append(word)
         first_line = false
     update_words()
 

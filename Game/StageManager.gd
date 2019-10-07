@@ -39,6 +39,7 @@ func _process(delta):
         if showing_player >= 2 * starting_pause:
             goal.show()
             started = true
+            Game.player.started = true
             emit_signal("started")
         elif showing_player >= starting_pause:
             Game.player.show()

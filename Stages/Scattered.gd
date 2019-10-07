@@ -4,6 +4,7 @@ const Star = preload("res://Items/Star.tscn")
 
 export var STAR_NUMBER = 5
 export var SCATTER_SPEED = 5.0
+export var RECOVERING_PAUSE = 1.5
 export var MAX_RANDOM_TIMES = 5
 export var STAR_RANGE_X = [0, 1200]
 export var STAR_RANGE_Y = [32, 192]
@@ -15,7 +16,7 @@ onready var stars = $Stars
 onready var maze = $Viewport/Maze
 
 var started = false
-var recovering = false
+var recovering = -1
 var random_times = MAX_RANDOM_TIMES
 var remaining_stars = -1
 
@@ -44,17 +45,18 @@ func scatter():
         remove_child(maze)
         subview.add_child(maze)
     started = true
-    recovering = false
+    recovering = -1
     block.disabled = false
 
 
 func recover():
     started = true
-    recovering = true
+    recovering = RECOVERING_PAUSE
     
 
 func recover_end():
     started = false
+    recovering = -1
     var goal = stage_manager.goal
     if goal.get_parent() == subview:
         subview.remove_child(goal)
@@ -70,11 +72,12 @@ func _process(delta):
         return
     random_times += delta * SCATTER_SPEED
     if random_times >= MAX_RANDOM_TIMES:
-        if recovering:
+        random_times = 1
+    if recovering >= 0:
+        recovering -= delta
+        if recovering < 0:
             random_times = 0
             recover_end()
-        else:
-            random_times = 1
     var mat = sprite.get_material()
     mat.set_shader_param("random_times", floor(random_times))
 

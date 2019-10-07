@@ -16,5 +16,5 @@ func _process(delta):
 
 
 func _unhandled_input(event):
-    if credit_ended and event.is_action_released("search"):
-        Game.start(0)
+    if credit_ended and (event.is_action_released("search") or event.is_action_released("home")):
+        Game.next_stage()
