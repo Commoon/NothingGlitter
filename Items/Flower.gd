@@ -9,18 +9,22 @@ const TEXTURES = [
 var growing = false
 var target_scale = 0.0
 var grow_speed = 0.0
+var grow_rotation_speed = 0.0
 
 
 func _ready():
     $Sprite.texture = TEXTURES[floor(randf() * TEXTURES.size())]
+    scale = Vector2.ZERO
 
 
-func grow(speed, hue):
-    modulate = Color.from_hsv(hue, 0.7, 0.7)
+func grow(speed, rotation_speed, target_scale, color):
+    self.target_scale = target_scale
+    modulate = color
     grow_speed = speed
+    grow_rotation_speed = rotation_speed
     growing = true
-    
-    
+
+
 func _process(delta):
     if not growing:
         return
@@ -29,3 +33,4 @@ func _process(delta):
         p = target_scale
         growing = false
     scale = Vector2.ONE * p
+    rotate(grow_rotation_speed * delta)

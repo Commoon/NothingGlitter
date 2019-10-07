@@ -7,7 +7,10 @@ export var GROW_SIZE = [0.5, 1.0]
 export var GROW_DELAY = 0.1
 export var GROW_F = 0.03
 export var GROW_FLOWER_SPEED = 5.0
+export var GROW_FLOWER_ROTATION = 0.6
 export var FLOWER_HUE = [0.67, 1.2]
+export var FLOWER_SATURATION = [0.7, 0.7]
+export var FLOWER_LIGHTNESS = [0.7, 0.7]
 
 const Flower = preload("res://Items/Flower.tscn")
 
@@ -17,6 +20,8 @@ onready var plants = $Plants
 
 
 func _ready():
+    $Memory.position = $Player.position
+    $Memory.hide()
     for each in $Paths.get_children():
         var path = each.get_node("PathFollow2D") as PathFollow2D
         var stem = Line2D.new()
@@ -27,6 +32,7 @@ func _ready():
 
 
 func _on_StageManager_started():
+    $Memory.show()
     started = paths.size()
 
 
@@ -34,13 +40,13 @@ func grow_flower(pos, rot):
     var r = rand_range(-GROW_RANGE, GROW_RANGE)
     var flower_position = pos + (Vector2.UP * r).rotated(rot)
     var flower = Flower.instance()
-    var s = rand_range(GROW_SIZE[0], GROW_SIZE[1])
+    var target_scale = rand_range(GROW_SIZE[0], GROW_SIZE[1])
+    var h = rand_range(FLOWER_HUE[0], FLOWER_HUE[1])
+    var s = rand_range(FLOWER_SATURATION[0], FLOWER_SATURATION[1])
+    var v = rand_range(FLOWER_LIGHTNESS[0], FLOWER_LIGHTNESS[1])
     flower.position = flower_position
-    flower.scale = Vector2.ZERO
-    flower.target_scale = s
     plants.add_child(flower)
-    var hue = rand_range(FLOWER_HUE[0], FLOWER_HUE[1])
-    flower.grow(GROW_FLOWER_SPEED, hue)
+    flower.grow(GROW_FLOWER_SPEED, GROW_FLOWER_ROTATION, target_scale, Color.from_hsv(h, s, v))
 
 
 func _physics_process(delta):
@@ -71,3 +77,7 @@ func _physics_process(delta):
             stem.add_point(path.position)
         each[2] = progress
         each[3] = n_flowers
+
+
+func _on_Memory_interacted():
+    pass # Replace with function body.
