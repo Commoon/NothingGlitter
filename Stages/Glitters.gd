@@ -3,7 +3,6 @@ extends Stage
 
 onready var words = $Words
 onready var glitters_background = $GlittersBackground
-onready var glitters_bounds = $GlittersBackground/CollisionShape2D
 onready var glitters = $Glitters
 
 
@@ -19,11 +18,9 @@ func update_glitters(text):
     if Utils.check_phrase("Nothing glitter", text):
         finish_sentence()
         glitters_background.hide()
-        glitters_bounds.disabled = true
         glitters.emitting = false
     elif not $GlittersBackground.visible:
         glitters_background.show()
-        glitters_bounds.disabled = false
         glitters.emitting = true
 
 
