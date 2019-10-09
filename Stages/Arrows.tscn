@@ -19,46 +19,27 @@ tile_data = PoolIntArray( 262144, 12, 0, 262146, 14, 0, 262147, 1, 0, 262148, 1,
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="ArrowSet" parent="Node2D" instance=ExtResource( 4 )]
-position = Vector2( -64, 352 )
+position = Vector2( -64, 320 )
 SPEED = 800.0
-PAUSE = 0.8
-START_VALUE = 0.0
-END_VALUE = 1408.0
-TO_RIGHT = true
 
 [node name="ArrowSet2" parent="Node2D" instance=ExtResource( 4 )]
-position = Vector2( 1344, 480 )
+position = Vector2( 1344, 448 )
 rotation = -1.5708
 SPEED = 960.0
-PAUSE = 0.8
-START_VALUE = 0.0
-END_VALUE = 1408.0
 TO_RIGHT = false
 
 [node name="ArrowSet3" parent="Node2D" instance=ExtResource( 4 )]
-position = Vector2( -64, 608 )
+position = Vector2( -64, 576 )
 SPEED = 1080.0
-PAUSE = 0.8
-START_VALUE = 0.0
-END_VALUE = 1408.0
-TO_RIGHT = true
 
 [node name="ArrowSet4" parent="Node2D" instance=ExtResource( 4 )]
-position = Vector2( 1344, 736 )
+position = Vector2( 1344, 704 )
 rotation = -1.5708
 SPEED = 1440.0
-PAUSE = 0.8
-START_VALUE = 0.0
-END_VALUE = 1408.0
 TO_RIGHT = false
 
 [node name="ArrowSet5" parent="Node2D" instance=ExtResource( 4 )]
-position = Vector2( -64, 864 )
-SPEED = 1600.0
-PAUSE = 0.8
-START_VALUE = 0.0
-END_VALUE = 1408.0
-TO_RIGHT = true
+position = Vector2( -64, 832 )
 
 [node name="Words" type="Node2D" parent="."]
 
